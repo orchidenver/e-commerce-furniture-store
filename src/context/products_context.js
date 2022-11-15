@@ -19,6 +19,10 @@ const initialState = {
   productsError: false,
   products: [],
   featuredProducts: [],
+  singleProductLoading: false,
+  singleProductError: false,
+  singleProduct: {},
+  fetchSingleProduct: () => { },
   openSidebar: () => { },
   closeSidebar: () => { },
 };
@@ -34,6 +38,7 @@ export const ProductsProvider = ({ children }) => {
 
   const context = {
     ...state,
+    fetchSingleProduct,
     openSidebar,
     closeSidebar
   };
@@ -47,6 +52,18 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
     } catch (error) {
       dispatch({ type: GET_PRODUCTS_ERROR });
+    }
+  }
+
+  async function fetchSingleProduct(url) {
+    dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+
+    try {
+      const response = await axios.get(url);
+      const singleProduct = response.data;
+      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }
   }
 
