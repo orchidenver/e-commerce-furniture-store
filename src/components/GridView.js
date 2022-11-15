@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Product from './Product'
 
 const GridView = ({ products }) => {
-  const productsBlock = products.map((product) => {
+  const productsBlock = products.map(product => {
     return <Product key={product.id} {...product} />
   });
 
