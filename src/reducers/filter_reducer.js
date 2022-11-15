@@ -18,6 +18,22 @@ const filter_reducer = (state, action) => {
     }
   }
 
+  if (action.type === SET_GRIDVIEW) {
+    return {
+      ...state,
+      gridView: true,
+      listView: false
+    }
+  }
+
+  if (action.type === SET_LISTVIEW) {
+    return {
+      ...state,
+      gridView: false,
+      listView: true
+    }
+  }
+
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 
