@@ -104,11 +104,36 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type === FILTER_PRODUCTS) {
+    const { allProducts, filters: { text, category, company, color, price, shipping } } = state;
 
-    return { ...state };
+    let tempProducts = [...allProducts];
+
+    if (text) {
+      tempProducts = tempProducts.filter(product => product.name.toLowerCase().startsWith(text));
+    }
+
+    if (category !== 'all') {
+      tempProducts = tempProducts.filter(product => product.category === category);
+    }
+
+    if (company !== 'all') {
+      tempProducts = tempProducts.filter(product => product.company === company);
+    }
+
+    if (color !== 'all') {
+      tempProducts = tempProducts.filter(product => product.colors.find(c => c === color));
+    }
+
+    tempProducts = tempProducts.filter(product => product.price <= price);
+
+    if (shipping) {
+      tempProducts = tempProducts.filter(product => product.shipping === true);
+    }
+
+    return { ...state, filteredProducts: tempProducts };
   }
 
-  throw new Error(`No Matching "${action.type}" - action type`)
+  throw new Error(`No Matching "${action.type}" - action type`);
 }
 
-export default filter_reducer
+export default filter_reducer;
