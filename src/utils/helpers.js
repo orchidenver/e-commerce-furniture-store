@@ -5,4 +5,8 @@ export function formatPrice(number) {
     }).format(number / 100);
 }
 
-export const getUniqueValues = () => { }
+export const getUniqueValues = (data, type) => {
+    if (type === 'colors') return ['all', ...new Set(data.map((item) => item[type]).flat())];
+
+    return ['all', ...new Set(data.map((item) => item[type]))];
+}

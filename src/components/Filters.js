@@ -1,11 +1,156 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useFilterContext } from '../context/filter_context'
-import { getUniqueValues, formatPrice } from '../utils/helpers'
-import { FaCheck } from 'react-icons/fa'
+import React from 'react';
+import styled from 'styled-components';
+import { useFilterContext } from '../context/filter_context';
+import { getUniqueValues, formatPrice } from '../utils/helpers';
+import { FaCheck } from 'react-icons/fa';
 
 const Filters = () => {
-  return <h4>filters</h4>
+  const {
+    filters: {
+      text,
+      category,
+      company,
+      color,
+      minPrice,
+      price,
+      maxPrice,
+      shipping,
+    },
+    updateFilters,
+    clearFilters,
+    allProducts
+  } = useFilterContext();
+
+  const categories = getUniqueValues(allProducts, 'category');
+  const companies = getUniqueValues(allProducts, 'company');
+  const colors = getUniqueValues(allProducts, 'colors');
+
+  const categoryElements = categories.map((cat, index) => {
+    return (
+      <button
+        key={index}
+        onClick={updateFilters}
+        type='button'
+        name='category'
+        className={`${category === cat.toLowerCase() ? 'active' : null
+          }`}
+      >
+        {cat}
+      </button>
+    )
+  });
+
+  const companyOptions = companies.map((comp, index) => {
+    return (
+      <option key={index} value={comp}>
+        {comp}
+      </option>
+    )
+  });
+
+  const colorElements = colors.map((col, index) => {
+    if (col === 'all') {
+      return (
+        <button
+          key={index}
+          name='color'
+          onClick={updateFilters}
+          data-color='all'
+          className={`${color === 'all' ? 'all-btn active' : 'all-btn'
+            }`}
+        >
+          all
+        </button>
+      )
+    }
+    return (
+      <button
+        key={index}
+        name='color'
+        style={{ background: col }}
+        className={`${color === col ? 'color-btn active' : 'color-btn'
+          }`}
+        data-color={col}
+        onClick={updateFilters}
+      >
+        {color === col ? <FaCheck /> : null}
+      </button>
+    )
+  });
+
+  return (
+    <Wrapper>
+      <div className='content'>
+        <form onSubmit={(e) => e.preventDefault()}>
+
+          <div className='form-control'>
+            <input
+              type='text'
+              name='text'
+              placeholder='search'
+              className='search-input'
+              value={text}
+              onChange={updateFilters}
+            />
+          </div>
+
+          <div className='form-control'>
+            <h5>category</h5>
+            <div>
+              {categoryElements}
+            </div>
+          </div>
+
+          <div className='form-control'>
+            <h5>company</h5>
+            <select
+              name='company'
+              value={company}
+              onChange={updateFilters}
+              className='company'
+            >
+              {companyOptions}
+            </select>
+          </div>
+
+          <div className='form-control'>
+            <h5>colors</h5>
+            <div className='colors'>
+              {colorElements}
+            </div>
+          </div>
+
+          <div className='form-control'>
+            <h5>price</h5>
+            <p className='price'>{formatPrice(price)}</p>
+            <input
+              type='range'
+              name='price'
+              min={minPrice}
+              max={maxPrice}
+              onChange={updateFilters}
+              value={price}
+            />
+          </div>
+
+          <div className='form-control shipping'>
+            <label htmlFor='shipping'> free shipping</label>
+            <input
+              type='checkbox'
+              name='shipping'
+              id='shipping'
+              onChange={updateFilters}
+              checked={shipping}
+            />
+          </div>
+        </form>
+        <button type='button' className='clear-btn' onClick={clearFilters}>
+          {' '}
+          clear filters
+        </button>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
@@ -87,6 +232,7 @@ const Wrapper = styled.section`
   }
   .shipping {
     display: grid;
+    justify-items: start;
     grid-template-columns: auto 1fr;
     align-items: center;
     text-transform: capitalize;
