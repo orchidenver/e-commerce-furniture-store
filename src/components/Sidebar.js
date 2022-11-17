@@ -10,6 +10,7 @@ import { useUserContext } from '../context/user_context';
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
 
   const sidebarLinks = links.map(link => {
     const { id, text, url } = link;
@@ -23,6 +24,14 @@ const Sidebar = () => {
     );
   });
 
+  const checkOutLink = myUser && (
+    <li>
+      <Link to='/checkout' onClick={closeSidebar}>
+        checkout
+      </Link>
+    </li>
+  );
+
   return (
     <SidebarContainer>
       <aside className={`${isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'}`} onClick={closeSidebar}>
@@ -34,11 +43,7 @@ const Sidebar = () => {
         </div>
         <ul className="links">
           {sidebarLinks}
-          <li>
-            <Link to='/checkout' onClick={closeSidebar}>
-              checkout
-            </Link>
-          </li>
+          {checkOutLink}
         </ul>
         <CartButtons />
       </aside>
