@@ -1,10 +1,10 @@
-import React from 'react'
-import { useProductsContext } from '../context/products_context'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import Error from './Error'
-import Loading from './Loading'
-import Product from './Product'
+import React from 'react';
+import { useProductsContext } from '../context/products_context';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Error from './Error';
+import Loading from './Loading';
+import Product from './Product';
 
 const FeaturedProducts = () => {
   const {
@@ -29,6 +29,7 @@ const FeaturedProducts = () => {
       <div className="section-center featured">
         {productElements}
       </div>
+      <Link className='btn' to='/products'>All products</Link>
     </Wrapper>
   );
 }

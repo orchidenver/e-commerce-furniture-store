@@ -19,6 +19,7 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
   }, [id]);
 
   const history = useHistory();
@@ -50,6 +51,7 @@ const SingleProductPage = () => {
     }
 
     return () => { clearTimeout(timer) };
+    // eslint-disable-next-line
   }, [singleProductError]);
 
   if (singleProductLoading) return <Loading />;
