@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useReducer } from 'react';
-import reducer from '../reducers/cart_reducer';
+import reducer from '../reducers/cartReducer';
 import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
@@ -29,10 +29,11 @@ const initialState = {
   clearCart: () => { }
 };
 
-const CartContext = React.createContext()
+const CartContext = React.createContext(initialState);
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
 
   const context = {
     ...state,
@@ -75,7 +76,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider value={context}>{children}</CartContext.Provider>
   )
 }
-// make sure use
+
 export const useCartContext = () => {
-  return useContext(CartContext)
+  return useContext(CartContext);
 }

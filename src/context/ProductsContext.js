@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import reducer from '../reducers/products_reducer';
-import { products_url as url } from '../utils/constants';
+import reducer from '../reducers/productsReducer';
+import { productsUrl as url } from '../utils/constants';
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -27,7 +27,7 @@ const initialState = {
   closeSidebar: () => { },
 };
 
-const ProductsContext = React.createContext();
+const ProductsContext = React.createContext(initialState);
 
 export const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

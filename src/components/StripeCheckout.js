@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -8,8 +8,8 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
+import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 import { formatPrice } from '../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   // transfer data to create-payment-intent fn
-  async function createPaymentIntent() {
+  const createPaymentIntent = useCallback(async () => {
     try {
       const { data } = await axios.post(
         '/.netlify/functions/create-payment-intent',
@@ -43,11 +43,12 @@ const CheckoutForm = () => {
     } catch (error) {
       // console.log(error.response);
     }
-  }
+  }, [cart, shippingFee, totalAmount]);
+
 
   useEffect(() => {
     createPaymentIntent();
-  }, []);
+  }, [createPaymentIntent]);
 
   async function onHandleChange(e) {
     setDisabled(e.empty);
@@ -135,7 +136,7 @@ const CheckoutForm = () => {
         {/* Show a success message upon completion */}
         <p className={succeeded ? 'result-message' : 'result-message hidden'}>
           Payment succeeded, see the result in your
-          <a href={`https://dashboard.stripe.com/test/payments`} target='_blank'>
+          <a href={`https://dashboard.stripe.com/test/payments`} target='_blank' rel="noreferrer">
             {' '}
             Stripe dashboard.
           </a>{' '}

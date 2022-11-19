@@ -4,15 +4,16 @@ import {
   COUNT_CART_TOTALS,
   REMOVE_CART_ITEM,
   CHANGE_CART_ITEM_AMOUNT,
-} from '../actions'
+} from '../actions';
 
-const cart_reducer = (state, action) => {
+const cartReducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
     const { id, color, amount, product } = action.payload;
     const tempItem = state.cart.find(item => item.id === id + color);
 
     if (tempItem) {
       const tempCart = state.cart.map(item => {
+
         if (item.id === id + color) {
           let newItemAmount = item.amount + amount > item.max ? item.max : item.amount + amount;
           return { ...item, amount: newItemAmount };
@@ -46,7 +47,7 @@ const cart_reducer = (state, action) => {
   }
 
   if (action.type === CHANGE_CART_ITEM_AMOUNT) {
-    const { id, value } = action.payload
+    const { id, value } = action.payload;
     const tempCart = state.cart.map(item => {
 
       if (item.id === id) {
@@ -71,6 +72,7 @@ const cart_reducer = (state, action) => {
 
   if (action.type === COUNT_CART_TOTALS) {
     const { totalItems, totalAmount } = state.cart.reduce(
+
       (total, cartItem) => {
         const { amount, price } = cartItem;
 
@@ -83,10 +85,10 @@ const cart_reducer = (state, action) => {
         totalAmount: 0,
       }
     )
-    return { ...state, totalItems, totalAmount }
+    return { ...state, totalItems, totalAmount };
   }
 
-  throw new Error(`No Matching "${action.type}" - action type`)
+  throw new Error(`No Matching "${action.type}" - action type`);
 }
 
-export default cart_reducer
+export default cartReducer;

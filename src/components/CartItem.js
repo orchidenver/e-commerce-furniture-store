@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { formatPrice } from '../utils/helpers';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
-import { useCartContext } from '../context/cart_context';
+import { useCartContext } from '../context/CartContext';
 
 const CartItem = ({ id, image, name, color, price, amount }) => {
   const { removeItem, changeAmount } = useCartContext();

@@ -7,9 +7,9 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
-} from '../actions'
+} from '../actions';
 
-const filter_reducer = (state, action) => {
+const filterReducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
     const maxPrice = Math.max(...action.payload.map(p => p.price));
 
@@ -136,4 +136,4 @@ const filter_reducer = (state, action) => {
   throw new Error(`No Matching "${action.type}" - action type`);
 }
 
-export default filter_reducer;
+export default filterReducer;
