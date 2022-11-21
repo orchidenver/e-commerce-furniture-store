@@ -7,18 +7,11 @@ import loader from '../assets/auth-loader.gif';
 const AuthWrapper = ({ children }) => {
   const { isLoading, error } = useAuth0();
 
-  if (isLoading) {
+  if (error || isLoading) {
     return (
       <Wrapper>
-        <LazyLoadImage src={loader} alt="loading page..." effect='blur' />
-      </Wrapper>
-    )
-  }
-
-  if (error) {
-    return (
-      <Wrapper>
-        <h1>{error.message}</h1>
+        {error ? <h1>{error.message}</h1> : null}
+        {isLoading ? <LazyLoadImage src={loader} alt="loading page..." effect='blur' /> : null}
       </Wrapper>
     )
   }

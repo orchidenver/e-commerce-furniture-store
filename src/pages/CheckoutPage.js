@@ -8,13 +8,6 @@ import { Link } from 'react-router-dom';
 const CheckoutPage = () => {
   const { cart } = useCartContext();
 
-  const checkoutContent = !cart.length ? (
-    <div className='empty'>
-      <h2>Your cart is empty</h2>
-      <Link className='btn' to='/products'> Go to products</Link>
-    </div>
-  ) : <StripeCheckout />;
-
   return (
     <>
       <Helmet>
@@ -24,7 +17,12 @@ const CheckoutPage = () => {
       <main>
         <PageHero title='checkout' />
         <Wrapper className='page'>
-          {checkoutContent}
+          {!cart.length ? (
+            <div className='empty'>
+              <h2>Your cart is empty</h2>
+              <Link className='btn' to='/products'> Go to products</Link>
+            </div>
+          ) : <StripeCheckout />}
         </Wrapper>
       </main>
     </>

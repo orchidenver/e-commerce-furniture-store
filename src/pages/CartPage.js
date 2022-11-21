@@ -8,14 +8,13 @@ import { CartContent, PageHero } from '../components';
 const CartPage = () => {
   const { cart } = useCartContext();
 
-  if (!cart.length) {
-
-    return (
-      <>
-        <Helmet>
-          <meta name="description" content="This page contains your cart and products you added" />
-          <title>Comfy Sloth. Your cart</title>
-        </Helmet>
+  return (
+    <>
+      <Helmet>
+        <meta name="description" content="This page describes the company" />
+        <title>Comfy Sloth. Your cart</title>
+      </Helmet>
+      {!cart.length ? (
         <Wrapper className='page-100'>
           <div className='empty'>
             <h2>Your cart is empty</h2>
@@ -24,22 +23,14 @@ const CartPage = () => {
             </Link>
           </div>
         </Wrapper>
-      </>
-    )
-  }
-
-  return (
-    <>
-      <Helmet>
-        <meta name="description" content="This page describes the company" />
-        <title>Comfy Sloth. Your cart</title>
-      </Helmet>
-      <main>
-        <PageHero title='cart' />
-        <Wrapper className='page'>
-          <CartContent />
-        </Wrapper>
-      </main>
+      ) : (
+        <main>
+          <PageHero title='cart' />
+          <Wrapper className='page'>
+            <CartContent />
+          </Wrapper>
+        </main>
+      )}
     </>
 
   )
