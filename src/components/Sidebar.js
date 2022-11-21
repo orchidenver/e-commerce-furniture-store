@@ -7,6 +7,8 @@ import { links } from '../utils/constants';
 import styled from 'styled-components';
 import CartButtons from './CartButtons';
 import { useUserContext } from '../context/UserContext';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
@@ -36,7 +38,7 @@ const Sidebar = () => {
     <SidebarContainer>
       <aside className={`${isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'}`} onClick={closeSidebar}>
         <div className="sidebar-header">
-          <img className='logo' src={logo} alt="logo" />
+          <LazyLoadImage className='logo' src={logo} alt="logo" effect='blur' />
           <button className="close-btn">
             <FaTimes />
           </button>

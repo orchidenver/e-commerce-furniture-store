@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { PageHero } from '../components';
 import aboutImg from '../assets/hero-bcg.jpeg';
 
@@ -8,7 +9,7 @@ const AboutPage = () => {
     <main>
       <PageHero title='about' />
       <Wrapper className='page section section-center'>
-        <img src={aboutImg} alt='desk' />
+        <LazyLoadImage src={aboutImg} alt='desk' effect='blur' />
         <article>
           <div className="title">
             <h2>our story</h2>

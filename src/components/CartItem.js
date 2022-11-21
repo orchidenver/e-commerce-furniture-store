@@ -4,6 +4,8 @@ import { formatPrice } from '../utils/helpers';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
 import { useCartContext } from '../context/CartContext';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const CartItem = ({ id, image, name, color, price, amount }) => {
   const { removeItem, changeAmount } = useCartContext();
@@ -18,7 +20,7 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
   return (
     <Wrapper>
       <div className='title'>
-        <img src={image} alt={name} />
+        <LazyLoadImage src={image} alt={name} effect='blur' />
         <div>
           <h5 className='name'>{name}</h5>
           <p className='color'>

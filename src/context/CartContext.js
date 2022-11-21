@@ -33,7 +33,6 @@ const CartContext = React.createContext(initialState);
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
 
   const context = {
     ...state,

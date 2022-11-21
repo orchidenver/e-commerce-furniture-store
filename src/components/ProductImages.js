@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const ProductImages = ({ images = [{ url: '' }] }) => {
   const [main, setMain] = useState(images[0]);
 
   const imagesBlock = images.map((image, index) => {
     return (
-      <img
+      <LazyLoadImage
+        effect='blur'
         src={image.url}
         alt={image.filename}
         key={index}
@@ -18,7 +21,7 @@ const ProductImages = ({ images = [{ url: '' }] }) => {
 
   return (
     <Wrapper>
-      <img src={main.url} alt='main' className='main' />
+      <LazyLoadImage src={main.url} alt='main' className='main' effect='blur' />
       <div className='gallery'>
         {imagesBlock}
       </div>

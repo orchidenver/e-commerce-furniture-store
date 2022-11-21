@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import errorPage from '../assets/404.svg';
 
 const ErrorPage = () => {
   return (
     <Wrapper className='page-100'>
       <section>
-        <h1>404</h1>
-        <h3>Sorry, you are looking for the wrong page</h3>
+        <LazyLoadImage src={errorPage} alt="page missing" effect='blur' />
         <Link to='/' className="btn">back home</Link>
       </section>
     </Wrapper>
@@ -20,12 +21,20 @@ const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   text-align: center;
-  h1 {
-    font-size: 10rem;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  h3 {
-    text-transform: none;
-    margin-bottom: 2rem;
+
+  img {
+    width: 400px;
+    height: auto;
+  }
+
+  .btn {
+    width: 200px;
   }
 `
 

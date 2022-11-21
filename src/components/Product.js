@@ -1,14 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import { formatPrice } from '../utils/helpers'
-import { FaSearch } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { formatPrice } from '../utils/helpers';
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Product = ({ image, name, price, id }) => {
   return (
     <Wrapper>
       <div className="container">
-        <img src={image} alt={name} />
+        <LazyLoadImage src={image} alt={name} effect='blur' />
         <Link to={`/products/${id}`} className="link">
           <FaSearch />
         </Link>
@@ -75,6 +77,10 @@ const Wrapper = styled.article`
   footer p {
     color: var(--clr-primary-5);
     letter-spacing: var(--spacing);
+  }
+
+  span {
+    display: inline !important;
   }
 `
 export default Product

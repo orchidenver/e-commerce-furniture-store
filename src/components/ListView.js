@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatPrice } from '../utils/helpers';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const ListView = ({ products }) => {
   const productsBlock = products.map(product => {
@@ -9,7 +11,7 @@ const ListView = ({ products }) => {
 
     return (
       <article key={id}>
-        <img src={image} alt={name} />
+        <LazyLoadImage src={image} alt={name} effec='blur' />
         <div>
           <h4>{name}</h4>
           <h5 className='price'>{formatPrice(price)}</h5>

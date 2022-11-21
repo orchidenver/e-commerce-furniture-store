@@ -7,6 +7,8 @@ import { links } from '../utils/constants';
 import CartButtons from './CartButtons';
 import { useProductsContext } from '../context/ProductsContext';
 import { useUserContext } from '../context/UserContext';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
@@ -35,7 +37,7 @@ const Nav = () => {
       <div className="nav-center">
         <div className="nav-header">
           <Link to='/'>
-            <img src={logo} alt="logo" />
+            <LazyLoadImage src={logo} alt="logo" effect='blur' />
           </Link>
           <button type='button' className="nav-toggle" onClick={openSidebar}>
             <FaBars />

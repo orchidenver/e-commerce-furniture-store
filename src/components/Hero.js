@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import heroBcg from '../assets/hero-bcg.jpeg';
 import heroBcg2 from '../assets/hero-bcg-2.jpeg';
 
@@ -13,8 +14,8 @@ const Hero = () => {
         <Link to='/products' className="btn btn-hero">shop now</Link>
       </article>
       <article className="img-container">
-        <img className='main-img' src={heroBcg} alt='table' />
-        <img className='accent-img' src={heroBcg2} alt="person" />
+        <LazyLoadImage className='main-img' src={heroBcg} alt='table' effect='blur' />
+        <LazyLoadImage className='accent-img' src={heroBcg2} alt="person" effect='blur' />
       </article>
     </Wrapper>
   );
