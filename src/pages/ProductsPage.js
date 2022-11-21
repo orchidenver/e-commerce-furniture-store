@@ -1,21 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { Filters, ProductList, Sort, PageHero } from '../components';
 
 const ProductsPage = () => {
   return (
-    <main>
-      <PageHero title='products' />
-      <Wrapper className='page'>
-        <div className='section-center products'>
-          <Filters />
-          <div>
-            <Sort />
-            <ProductList />
+    <>
+      <Helmet>
+        <meta name="description" content="Here you can browse our products" />
+        <title>Comfy Sloth. Products</title>
+      </Helmet>
+      <main>
+        <PageHero title='products' />
+        <Wrapper className='page'>
+          <div className='section-center products'>
+            <Filters />
+            <div>
+              <Sort />
+              <ProductList />
+            </div>
           </div>
-        </div>
-      </Wrapper>
-    </main>
+        </Wrapper>
+      </main>
+    </>
+
   )
 }
 

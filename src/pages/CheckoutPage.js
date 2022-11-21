@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { PageHero, StripeCheckout } from '../components';
 import { useCartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
@@ -15,12 +16,19 @@ const CheckoutPage = () => {
   ) : <StripeCheckout />;
 
   return (
-    <main>
-      <PageHero title='checkout' />
-      <Wrapper className='page'>
-        {checkoutContent}
-      </Wrapper>
-    </main>
+    <>
+      <Helmet>
+        <meta name="description" content="Here you can pay for your order" />
+        <title>Comfy Sloth. Checkout payments</title>
+      </Helmet>
+      <main>
+        <PageHero title='checkout' />
+        <Wrapper className='page'>
+          {checkoutContent}
+        </Wrapper>
+      </main>
+    </>
+
   );
 }
 
